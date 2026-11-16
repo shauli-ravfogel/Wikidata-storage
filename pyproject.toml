@@ -1,0 +1,25 @@
+[project]
+name = "wikifacts"
+version = "0.1.0"
+description = "Wikidata fact store, claim verification, and knowledge rewards for LLM training"
+requires-python = ">=3.10"
+dependencies = [
+    "pyyaml",
+    "requests",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["wikifacts"]
+
+[tool.setuptools.package-data]
+wikifacts = ["relations.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

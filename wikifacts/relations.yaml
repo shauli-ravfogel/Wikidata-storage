@@ -1,0 +1,323 @@
+# Relations the store is built for and claims are checked against.
+# Adding a relation = adding an entry here (then rebuild the store for it); there is no per-relation code.
+#
+# Fields:
+#   pid            Wikidata property id (e.g. P19 = place of birth).
+#   subject_class  Wikidata class of the subjects. Instances of the class OR of any subclass are included
+#                  (Spirited Away is an "anime film", which is a subclass of "film").
+#   answer_type    How answers are graded:
+#                    entity  a Wikidata item, matched by its label / aliases
+#                    place   an entity that is a place; enclosing units below the state level also count
+#                            as correct ("Valencia" for a neighbourhood of Valencia), countries / states never do
+#                    year    matched by the year only
+#   phrase         The relation as it appears in a claim: "I don't know <phrase> of <subject>."
+#   question       Template for asking a model the fact, filled with {subject} and {description}.
+#   placeholder    The subject slot shown in claim templates ("<full name>"). A model that echoes it back
+#                  instead of naming an entity has made no claim.
+#   multi_valued   Optional (default false). If false, subjects with more than one value are rejected
+#                  (the "correct" answer would be ambiguous).
+
+place_of_birth:
+  pid: P19
+  subject_class: Q5
+  answer_type: place
+  phrase: the place of birth
+  question: In what city was {subject} ({description}) born?
+  placeholder: <full name>
+
+place_of_death:
+  pid: P20
+  subject_class: Q5
+  answer_type: place
+  phrase: the place of death
+  question: In what city did {subject} ({description}) die?
+  placeholder: <full name>
+
+place_of_burial:
+  pid: P119
+  subject_class: Q5
+  answer_type: place
+  phrase: the place of burial
+  question: Where is {subject} ({description}) buried?
+  placeholder: <full name>
+
+year_of_birth:
+  pid: P569
+  subject_class: Q5
+  answer_type: year
+  phrase: the year of birth
+  question: In what year was {subject} ({description}) born?
+  placeholder: <full name>
+
+year_of_death:
+  pid: P570
+  subject_class: Q5
+  answer_type: year
+  phrase: the year of death
+  question: In what year did {subject} ({description}) die?
+  placeholder: <full name>
+
+educated_at:
+  pid: P69
+  subject_class: Q5
+  answer_type: entity
+  phrase: the alma mater
+  question: Which university did {subject} ({description}) attend?
+  multi_valued: true
+  placeholder: <full name>
+
+film_director:
+  pid: P57
+  subject_class: Q11424
+  answer_type: entity
+  phrase: the director
+  question: Who directed {subject} ({description})?
+  placeholder: <film title> (<release year>)
+
+book_author:
+  pid: P50
+  subject_class: Q7725634
+  answer_type: entity
+  phrase: the author
+  question: Who wrote {subject} ({description})?
+  placeholder: <book title> (<publication year>)
+
+composer:
+  pid: P86
+  subject_class: Q105543609
+  answer_type: entity
+  phrase: the composer
+  question: Who composed {subject} ({description})?
+  placeholder: <title of the work> (<year>)
+
+capital:
+  pid: P36
+  subject_class: Q10864048
+  answer_type: entity
+  phrase: the capital
+  question: What is the capital of {subject} ({description})?
+  placeholder: <name of the region>
+
+father:
+  pid: P22
+  subject_class: Q5
+  answer_type: entity
+  phrase: the father
+  question: Who is the father of {subject} ({description})?
+  placeholder: <full name>
+
+mother:
+  pid: P25
+  subject_class: Q5
+  answer_type: entity
+  phrase: the mother
+  question: Who is the mother of {subject} ({description})?
+  placeholder: <full name>
+
+drafted_by:
+  pid: P647
+  subject_class: Q5
+  answer_type: entity
+  phrase: the team that drafted
+  question: Which team drafted {subject} ({description})?
+  placeholder: <full name>
+
+film_composer:
+  pid: P86
+  subject_class: Q11424
+  answer_type: entity
+  phrase: the composer
+  question: Who composed the music for {subject} ({description})?
+  placeholder: <film title> (<release year>)
+
+cinematographer:
+  pid: P344
+  subject_class: Q11424
+  answer_type: entity
+  phrase: the cinematographer
+  question: Who was the cinematographer of {subject} ({description})?
+  placeholder: <film title> (<release year>)
+
+film_editor:
+  pid: P1040
+  subject_class: Q11424
+  answer_type: entity
+  phrase: the film editor
+  question: Who edited {subject} ({description})?
+  placeholder: <film title> (<release year>)
+
+film_year:
+  pid: P577
+  subject_class: Q11424
+  answer_type: year
+  phrase: the release year
+  question: In what year was {subject} ({description}) released?
+  placeholder: <film title> (<release year>)
+
+book_followed_by:
+  pid: P156
+  subject_class: Q7725634
+  answer_type: entity
+  phrase: the sequel
+  question: What is the sequel to {subject} ({description})?
+  placeholder: <book title> (<publication year>)
+
+book_follows:
+  pid: P155
+  subject_class: Q7725634
+  answer_type: entity
+  phrase: the predecessor
+  question: Which book came before {subject} ({description}) in its series?
+  placeholder: <book title> (<publication year>)
+
+book_illustrator:
+  pid: P110
+  subject_class: Q7725634
+  answer_type: entity
+  phrase: the illustrator
+  question: Who illustrated {subject} ({description})?
+  placeholder: <book title> (<publication year>)
+
+book_year:
+  pid: P577
+  subject_class: Q7725634
+  answer_type: year
+  phrase: the publication year
+  question: In what year was {subject} ({description}) published?
+  placeholder: <book title> (<publication year>)
+
+album_performer:
+  pid: P175
+  subject_class: Q482994
+  answer_type: entity
+  phrase: the performer
+  question: Who released the album {subject} ({description})?
+  placeholder: <album title> (<release year>)
+
+album_label:
+  pid: P264
+  subject_class: Q482994
+  answer_type: entity
+  phrase: the record label
+  question: Which record label released {subject} ({description})?
+  placeholder: <album title> (<release year>)
+
+album_year:
+  pid: P577
+  subject_class: Q482994
+  answer_type: year
+  phrase: the release year
+  question: In what year was the album {subject} ({description}) released?
+  placeholder: <album title> (<release year>)
+
+company_hq:
+  pid: P159
+  subject_class: Q4830453
+  answer_type: place
+  phrase: the headquarters
+  question: In what city is {subject} ({description}) headquartered?
+  placeholder: <company name>
+
+company_inception:
+  pid: P571
+  subject_class: Q4830453
+  answer_type: year
+  phrase: the founding year
+  question: In what year was {subject} ({description}) founded?
+  placeholder: <company name>
+
+company_parent:
+  pid: P749
+  subject_class: Q4830453
+  answer_type: entity
+  phrase: the parent company
+  question: What is the parent company of {subject} ({description})?
+  placeholder: <company name>
+
+building_architect:
+  pid: P84
+  subject_class: Q41176
+  answer_type: entity
+  phrase: the architect
+  question: Who was the architect of {subject} ({description})?
+  placeholder: <building name>
+
+building_inception:
+  pid: P571
+  subject_class: Q41176
+  answer_type: year
+  phrase: the year of completion
+  question: In what year was {subject} ({description}) built?
+  placeholder: <building name>
+
+game_developer:
+  pid: P178
+  subject_class: Q7889
+  answer_type: entity
+  phrase: the developer
+  question: Which company developed {subject} ({description})?
+  placeholder: <game title> (<release year>)
+
+club_venue:
+  pid: P115
+  subject_class: Q476028
+  answer_type: entity
+  phrase: the home stadium
+  question: What is the home stadium of {subject} ({description})?
+  placeholder: <club name>
+
+club_inception:
+  pid: P571
+  subject_class: Q476028
+  answer_type: year
+  phrase: the founding year
+  question: In what year was {subject} ({description}) founded?
+  placeholder: <club name>
+
+university_inception:
+  pid: P571
+  subject_class: Q3918
+  answer_type: year
+  phrase: the founding year
+  question: In what year was {subject} ({description}) founded?
+  placeholder: <university name>
+
+river_mouth:
+  pid: P403
+  subject_class: Q4022
+  answer_type: entity
+  phrase: the mouth
+  question: Into which body of water does {subject} ({description}) flow?
+  placeholder: <river name>
+
+band_formation_location:
+  pid: P740
+  subject_class: Q215380
+  answer_type: place
+  phrase: the city of formation
+  question: In what city was {subject} ({description}) formed?
+  placeholder: <band name>
+
+band_inception:
+  pid: P571
+  subject_class: Q215380
+  answer_type: year
+  phrase: the formation year
+  question: In what year was {subject} ({description}) formed?
+  placeholder: <band name>
+
+software_developer:
+  pid: P178
+  subject_class: Q7397
+  answer_type: entity
+  phrase: the developer
+  question: Which company developed {subject} ({description})?
+  placeholder: <software name>
+
+painting_creator:
+  pid: P170
+  subject_class: Q3305213
+  answer_type: entity
+  phrase: the painter
+  question: Who painted {subject} ({description})?
+  placeholder: <painting title> (<year>)
